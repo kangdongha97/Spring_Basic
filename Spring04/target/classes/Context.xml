@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 
+	@Bean
+	Fuel makeFuel() {
+		return new Water();
+	} 
+	-->
+	
+	<!-- Spring 에서 makeFuel 함수 생성 -->
+	<!-- 함수의 리턴 값은 Water 객체 위 코드와 아래 코드가 동일 -->
+	<!-- id : 함수명, class : 리턴 타입 -->
+	<!-- <bean id="makeFuel" class="Pack.Water"/> -->
+	
+	<bean id="makeWater" class="Pack.Water"/>
+	<bean id="makeGas" class="Pack.Gas"/>
+
+	<!-- 
+	@Bean 
+	Airplane airplane() {
+		return new Airplane(makeFuel()); 
+	} 
+	-->
+	
+	<!-- 생성자 인수전달이 있는 형식 위 코드와 아래코드가 같음-->
+	<bean id="airplane" class="Pack.Airplane">
+		<!-- 생성자의 인수전달 -->
+		<constructor-arg ref="makeWater"/>
+	</bean>
+	
+	<bean id="ship" class="Pack.Ship">
+		<constructor-arg ref="makeWater"/>
+	</bean>
+	
+	<bean id="car" class="Pack.Car">
+		<constructor-arg ref="makeGas"/>
+	</bean>
+	
+</beans>
